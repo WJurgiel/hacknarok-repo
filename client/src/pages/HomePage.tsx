@@ -27,4 +27,9 @@ export const HomePage = () => {
             <span>{timeStamp}</span>
         </>
     );
+
+export const HomePage = () => {
+    return(
+        <Button variant="filled">Button</Button>
+    )
 }
