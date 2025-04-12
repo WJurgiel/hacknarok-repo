@@ -3,6 +3,7 @@ package org.hattivati.server.service;
 import org.hattivati.server.dto.*;
 import org.hattivati.server.entities.Message;
 import org.hattivati.server.entities.User;
+import org.hattivati.server.repositories.LanguageRepository;
 import org.hattivati.server.repositories.MessageRepository;
 import org.hattivati.server.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class MainService {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private LanguageRepository languageRepository;
+
     public MainService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
@@ -37,7 +41,7 @@ public class MainService {
         user.setSurname(userDTO.getSurname());
         user.setAge(userDTO.getAge());
         user.setGender(userDTO.getGender());
-        user.setMainLanguage(userDTO.getMainLanguage());
+        user.setMainLanguage(languageRepository.findByName(userDTO.getMainLanguage().toLowerCase()));
 //        user.setLearningLanguages(userDTO.getLearningLanguages());
         String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
         user.setPassword(hashedPassword);
