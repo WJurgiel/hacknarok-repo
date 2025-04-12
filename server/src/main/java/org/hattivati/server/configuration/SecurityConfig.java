@@ -20,7 +20,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // wyłączenie CSRF (dla REST API OK)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/register/form", "/login/form").permitAll()  // pozwalamy np. na POST /users
+                        .requestMatchers("**").permitAll()  // pozwalamy np. na POST /users
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults()); // lub formLogin()

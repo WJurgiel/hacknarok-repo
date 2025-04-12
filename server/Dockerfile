@@ -1,4 +1,4 @@
-﻿FROM openjdk:latest
+﻿
 WORKDIR /server
 COPY . .
 CMD ["./mvnw", "package"]

@@ -3,6 +3,7 @@ package org.hattivati.server.controllers;
 import jakarta.validation.Valid;
 import org.hattivati.server.ServerApplication;
 import org.hattivati.server.dto.loginFormDTO;
+import org.hattivati.server.dto.usermessageDTO;
 import org.hattivati.server.service.MainService;
 import org.hattivati.server.dto.registrationFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,15 @@ public class MainController {
     boolean isDataValid(@Valid @RequestBody loginFormDTO userData){
         return mainService.isUserValid(userData);
     }
+
     @PostMapping("/register/form")
     public void registerUser(@RequestBody registrationFormDTO userDTO) {
         mainService.createUser(userDTO);
+    }
+
+    @PostMapping("/sendmessage")
+    public void sendMessage(@RequestBody usermessageDTO msgDTO) {
+        System.out.println(msgDTO);
+        mainService.sendMessage(msgDTO);
     }
 }
