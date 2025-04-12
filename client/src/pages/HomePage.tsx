@@ -9,7 +9,7 @@ export const HomePage = () => {
     useEffect(() => {
         if (hasMounted.current) {
             axios.get(
-                "http://localhost:8080/api/v1/home"
+                'http://localhost:8080/api/v1/home'
             ).then(response => setTimeStamp(response.data))
         } else {
             hasMounted.current = true;
