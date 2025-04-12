@@ -1,0 +1,108 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.loginWrapper {
+    min-height: 100vh;
+    background-color: #252A4A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.loginContainer {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+
+.logoBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+}
+
+.appTitle {
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    font-weight: 700;
+}
+
+.loginCard {
+    display: flex;
+    flex-direction: row;
+    border-radius: 16px;
+    background-color: #2b3059;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+}
+
+.loginImage {
+    width: 50%;
+    background-color: #2b3059;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.loginImage img {
+    max-width: 100%;
+    height: auto;
+}
+
+.loginForm {
+    width: 50%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .appTitle {
+        font-size: 1.5rem;
+    }
+
+    .loginCard {
+        flex-direction: column;
+    }
+
+    .loginImage,
+    .loginForm {
+        width: 100%;
+    }
+
+    .loginForm {
+        padding: 2rem;
+    }
+
+    .logoBlock {
+        flex-shrink: 0;
+        text-align: center;
+    }
+
+    .logoBlock img {
+        max-height: 60px;
+        height: auto;
+        width: auto;
+    }
+}
