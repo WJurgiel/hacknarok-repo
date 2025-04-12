@@ -1,12 +1,12 @@
 package org.hattivati.server.controllers;
 
+import jakarta.validation.Valid;
 import org.hattivati.server.ServerApplication;
+import org.hattivati.server.dto.loginFormDTO;
+import org.hattivati.server.service.MainService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 @RestController
@@ -22,4 +22,8 @@ public class MainController {
         return "Hello from server at " + new java.util.Date();
     }
 
+    @PutMapping("/login/form")
+    boolean isDataValid(@Valid @RequestBody loginFormDTO userData){
+        return MainService.isUserValid(userData);
+    }
 }
