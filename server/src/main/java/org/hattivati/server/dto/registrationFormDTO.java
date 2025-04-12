@@ -1,5 +1,7 @@
 package org.hattivati.server.dto;
 
+import org.hattivati.server.entities.Language;
+
 import java.util.ArrayList;
 
 public class registrationFormDTO {
@@ -9,8 +11,8 @@ public class registrationFormDTO {
     private String password;
     private int age;
     private String gender;
-    private String mainLanguage;
-    private ArrayList<String> learningLanguages;
+    private Language mainLanguage;
+    private ArrayList<Language> learningLanguages;
 
     public String getName() {
         return name;
@@ -36,15 +38,15 @@ public class registrationFormDTO {
         return gender;
     }
 
-    public String getMainLanguage() {
+    public Language getMainLanguage() {
         return mainLanguage;
     }
 
-    public ArrayList<String> getLearningLanguages() {
+    public ArrayList<Language> getLearningLanguages() {
         return learningLanguages;
     }
 
-    public registrationFormDTO(String name, String surname, String email, String password, int age, String gender, String mainLanguage, ArrayList<String> learningLanguages) {
+    public registrationFormDTO(String name, String surname, String email, String password, int age, String gender, Language mainLanguage, ArrayList<Language> learningLanguages) {
         this.name = name;
         this.surname = surname;
         this.email = email;
