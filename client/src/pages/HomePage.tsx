@@ -1,7 +1,6 @@
 import {Button} from "@mantine/core";
 import {useEffect, useRef, useState} from "react";
 import axios from 'axios'
-import {UserCard} from "../components/UserCard.tsx";
 import {ChatList} from "../components/ChatList.tsx";
 export const HomePage = () => {
     const [timeStamp, setTimeStamp] = useState("");
@@ -27,18 +26,22 @@ export const HomePage = () => {
             name: 'Anna',
             surname: 'Kowalska',
             lastMessage: 'Let’s catch up tomorrow!',
+            chatLanguage: "PL",
+            isMessageUnread: true
         },
         {
             avatarUrl: 'https://randomuser.me/api/portraits/men/2.jpg',
             name: 'John',
             surname: 'Smith',
             lastMessage: 'Sure, I’ll send the file!',
+            chatLanguage: "BE"
         },
         {
             avatarUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/640px-American_Beaver.jpg',
             name: 'Bu',
             surname: 'Br',
             lastMessage: 'Siema masz jakąś kłodę kurde ten',
+            chatLanguage: "DE"
         },
         {
             avatarUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/640px-American_Beaver.jpg',
@@ -73,7 +76,6 @@ export const HomePage = () => {
     ];
     return (
         <>
-            <Button variant="filled" onClick={click}>Button</Button>
             <ChatList users={mockUsers} />
             <br/>
             <span>{timeStamp}</span>

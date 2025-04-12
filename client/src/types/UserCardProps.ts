@@ -3,4 +3,6 @@ export type UserCardProps = {
     name: string;
     surname: string;
     lastMessage: string;
+    chatLanguage: string;
+    isMessageUnread: boolean;
 }
