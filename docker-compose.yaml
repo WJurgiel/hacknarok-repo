@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: db
+    environment:
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/users.csv:/docker-entrypoint-initdb.d/users.csv
+      - ./db/languages.csv:/docker-entrypoint-initdb.d/languages.csv
+      - ./db/messages.csv:/docker-entrypoint-initdb.d/messages.csv
+      - ./db/user_learning_languages.csv:/docker-entrypoint-initdb.d/user_learning_languages.csv
+    command: --local-infile=1
+
+volumes:
+  db_data:
