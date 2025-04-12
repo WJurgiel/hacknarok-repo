@@ -8,11 +8,18 @@ import org.springframework.stereotype.Service;
 
 import org.hattivati.server.dto.loginFormDTO;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Service
 public class MainService {
-
+    private final PasswordEncoder passwordEncoder;
     @Autowired
     private UserRepository userRepository;
+
+    public MainService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public void createUser(registrationFormDTO userDTO) {
         User user = new User();
@@ -22,7 +29,7 @@ public class MainService {
         user.setGender(userDTO.getGender());
         user.setMainLanguage(userDTO.getMainLanguage());
 //        user.setLearningLanguages(userDTO.getLearningLanguages());
-        String hashedPassword = userDTO.getPassword();
+        String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
         user.setPassword(hashedPassword);
         user.setEmail(userDTO.getEmail());
         userRepository.save(user);

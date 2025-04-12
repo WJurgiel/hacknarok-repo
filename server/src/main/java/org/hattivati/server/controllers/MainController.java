@@ -27,7 +27,7 @@ public class MainController {
         return "Hello from server at " + new java.util.Date();
     }
 
-    @PutMapping("/login/form")
+    @PostMapping("/login/form")
     boolean isDataValid(@Valid @RequestBody loginFormDTO userData){
         return mainService.isUserValid(userData);
     }
