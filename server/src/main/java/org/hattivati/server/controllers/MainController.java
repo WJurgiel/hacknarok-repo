@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import org.hattivati.server.ServerApplication;
 import org.hattivati.server.dto.loginFormDTO;
 import org.hattivati.server.service.MainService;
+import org.hattivati.server.dto.registrationFormDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/")
 public class MainController {
+
+    @Autowired
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
@@ -25,5 +29,9 @@ public class MainController {
     @PutMapping("/login/form")
     boolean isDataValid(@Valid @RequestBody loginFormDTO userData){
         return MainService.isUserValid(userData);
+    }
+    @PostMapping("/register/form")
+    public User registerUser(@RequestBody registrationFormDTO userDTO) {
+        return MainService.createUser(userDTO);
     }
 }
