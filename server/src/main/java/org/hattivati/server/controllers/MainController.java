@@ -8,6 +8,7 @@ import org.hattivati.server.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,13 +32,13 @@ public class MainController {
     }
 
     @PostMapping("/login/form")
-    boolean isDataValid(@Valid @RequestBody loginFormDTO userData){
+    ResponseEntity isDataValid(@Valid @RequestBody loginFormDTO userData){
         return mainService.isUserValid(userData);
     }
 
     @PostMapping("/register/form")
-    public void registerUser(@RequestBody registrationFormDTO userDTO) {
-        mainService.createUser(userDTO);
+    public ResponseEntity registerUser(@RequestBody registrationFormDTO userDTO) {
+        return mainService.createUser(userDTO);
     }
 
     @PostMapping("/sendmessage")
