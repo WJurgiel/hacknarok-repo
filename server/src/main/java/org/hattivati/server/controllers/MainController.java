@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     @Autowired
+    private MainService mainService;
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
@@ -28,10 +29,10 @@ public class MainController {
 
     @PutMapping("/login/form")
     boolean isDataValid(@Valid @RequestBody loginFormDTO userData){
-        return MainService.isUserValid(userData);
+        return mainService.isUserValid(userData);
     }
     @PostMapping("/register/form")
-    public User registerUser(@RequestBody registrationFormDTO userDTO) {
-        return MainService.createUser(userDTO);
+    public void registerUser(@RequestBody registrationFormDTO userDTO) {
+        mainService.createUser(userDTO);
     }
 }
