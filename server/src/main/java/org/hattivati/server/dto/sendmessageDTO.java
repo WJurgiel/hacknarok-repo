@@ -3,9 +3,7 @@ package org.hattivati.server.dto;
 import jakarta.validation.constraints.NotBlank;
 import org.hattivati.server.entities.User;
 
-import java.time.Instant;
-
-public class usermessageDTO {
+public class sendmessageDTO {
     @NotBlank
     String text;
 
@@ -35,5 +33,6 @@ public class usermessageDTO {
     public void setToUser(User toUser) {
         this.toUser = toUser;
     }
+
 
 }

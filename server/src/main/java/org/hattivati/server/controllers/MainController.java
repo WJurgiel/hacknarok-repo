@@ -2,14 +2,16 @@ package org.hattivati.server.controllers;
 
 import jakarta.validation.Valid;
 import org.hattivati.server.ServerApplication;
-import org.hattivati.server.dto.loginFormDTO;
-import org.hattivati.server.dto.usermessageDTO;
+import org.hattivati.server.dto.*;
+import org.hattivati.server.entities.Message;
 import org.hattivati.server.service.MainService;
-import org.hattivati.server.dto.registrationFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @RestController
@@ -39,8 +41,13 @@ public class MainController {
     }
 
     @PostMapping("/sendmessage")
-    public void sendMessage(@RequestBody usermessageDTO msgDTO) {
+    public void sendMessage(@RequestBody sendmessageDTO msgDTO) {
         System.out.println(msgDTO);
         mainService.sendMessage(msgDTO);
+    }
+
+    @GetMapping("/messages")
+    public List<getmessageDTO> getMessages (@RequestBody conversationDTO conversation) {
+        return mainService.getMessages(conversation);
     }
 }
