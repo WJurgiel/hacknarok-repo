@@ -52,4 +52,10 @@ public class MainController {
     public List<getmessageDTO> getMessages (@RequestBody conversationDTO conversation) {
         return mainService.getMessages(conversation);
     }
+
+    @PostMapping("/languagestolearn")
+    public void postLanguagesToLearn (@RequestBody languagesToLearnDTO dto)
+    {
+        mainService.postLanguagesToLearn(dto);
+    }
 }
