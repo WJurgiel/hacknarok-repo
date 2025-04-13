@@ -7,7 +7,7 @@ import {
     Stack,
     Select, Group,
 } from '@mantine/core';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 import styles from './modules/Register.module.css';
 import {useNavigate} from "react-router-dom";
@@ -22,7 +22,18 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [error, setError] = useState('');
+    const [languages, setLanguages] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch("http://localhost:8080/api/v1/languages/all") // <- tu Twój endpoint
+            .then((res) => res.json())
+            .then(data => {
+                const onlyNames = data.map((language: { name: never; }) => language.name);
+                setLanguages(onlyNames);
+            })
+            .catch((err) => console.error("Błąd pobierania:", err));
+    }, []);
 
     const handleRegister = async () => {
         setError('');
@@ -83,7 +94,7 @@ const Register = () => {
                             label="Main Language"
                             c="white"
                             searchable
-                            data={["English", "Spanish", "French", "German", "Polish", "Italian", "Chinese", "Japanese"]}
+                            data={languages}
                             value={mainLanguage}
                             onChange={(val) => setMainLanguage(val || '')}
                             required
