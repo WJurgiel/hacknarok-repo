@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
 
+import static java.lang.Math.abs;
+
 @Service
 public class MainService {
     private final PasswordEncoder passwordEncoder;
@@ -36,6 +38,44 @@ public class MainService {
 
     public MainService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public userDTO findBestMatch(userDTO dto) {
+        List<User> allUsers = userRepository.findAll();
+        User user = userRepository.findByEmail(dto.getEmail());
+        List<Language> desiredLanguages = userLearningLanguageRepository.findLanguagesByUserId(user.getId());
+        User bestMatch = null;
+        ArrayList<User> languageCompatibleUsers = new ArrayList<>();
+
+        for (User candidate : allUsers) {
+            List <Language> candidateDesiredLanguages = userLearningLanguageRepository.findLanguagesByUserId(candidate.getId());
+            if (desiredLanguages.contains(candidate.getMainLanguage()) && candidateDesiredLanguages.contains(user.getMainLanguage()) && candidate.getEmail()!=user.getEmail())
+            {
+                languageCompatibleUsers.add(candidate);
+            }
+        }
+        if (languageCompatibleUsers.size() == 0)
+        {
+            userDTO result = new userDTO();
+            result.setEmail("NULL");
+            result.setName("NULL");
+            return result;
+        }
+        bestMatch = languageCompatibleUsers.get(0);
+        int bestMatchAgeGap = abs(bestMatch.getAge() - user.getAge());
+        for (int i = 1; i < languageCompatibleUsers.size(); i++) {
+            int ageGap = abs(languageCompatibleUsers.get(i).getAge() - user.getAge());
+            if (ageGap<bestMatchAgeGap)
+            {
+                bestMatch = languageCompatibleUsers.get(i);
+                bestMatchAgeGap = ageGap;
+            }
+        }
+
+        userDTO result = new userDTO();
+        result.setEmail(bestMatch.getEmail());
+        result.setName(bestMatch.getName());
+        return result;
     }
 
     public ResponseEntity createUser(registrationFormDTO userDTO) {
