@@ -3,6 +3,7 @@ package org.hattivati.server.service;
 import org.hattivati.server.dto.*;
 import org.hattivati.server.entities.Message;
 import org.hattivati.server.entities.User;
+import org.hattivati.server.repositories.ChattersRepository;
 import org.hattivati.server.repositories.LanguageRepository;
 import org.hattivati.server.repositories.MessageRepository;
 import org.hattivati.server.repositories.UserRepository;
@@ -27,6 +28,9 @@ public class MainService {
 
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private ChattersRepository chattersRepository;;
 
     @Autowired
     private LanguageRepository languageRepository;
@@ -83,6 +87,16 @@ public class MainService {
         User user2 = conversation.getUser2();
         //ArrayList<Message> messages = new ArrayList<>();
         ArrayList<Message> messages = messageRepository.findConversation(user1.getId(), user2.getId());
+        return messages.stream()
+                .map(getmessageDTO::fromEntity)
+                .collect(Collectors.toList());
+        //return messageRepository.findConversation(user1.getId(), user2.getId());
+    }
+
+    public List<getmessageDTO> getLastChatters(String email){
+        User user = userRepository.findByEmail(email);
+        System.out.println("Message: " + email);
+        ArrayList<Message> messages = chattersRepository.findEightLastChatters(user.getId());
         return messages.stream()
                 .map(getmessageDTO::fromEntity)
                 .collect(Collectors.toList());

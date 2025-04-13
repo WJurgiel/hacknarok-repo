@@ -51,4 +51,9 @@ public class MainController {
     public List<getmessageDTO> getMessages (@RequestBody conversationDTO conversation) {
         return mainService.getMessages(conversation);
     }
+
+    @PostMapping("/lastChatters")
+    public List<getmessageDTO> getLastChatters (@RequestBody emailDTO email) {
+        return mainService.getLastChatters(email.getEmail());
+    }
 }
