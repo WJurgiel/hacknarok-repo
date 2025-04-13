@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class MainService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional
     public userDTO findBestMatch(userDTO dto) {
         List<User> allUsers = userRepository.findAll();
         User user = userRepository.findByEmail(dto.getEmail());
@@ -83,6 +85,7 @@ public class MainService {
         return result;
     }
 
+    @Transactional
     public ResponseEntity createUser(registrationFormDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
@@ -103,6 +106,7 @@ public class MainService {
 
 
     }
+    @Transactional(readOnly = true)
     public ResponseEntity isUserValid(loginFormDTO userData) {
         User user = userRepository.findByEmail(userData.getEmail());
         if (user == null) {
@@ -117,6 +121,7 @@ public class MainService {
         }
     }
 
+    @Transactional
     public void sendMessage(sendmessageDTO msgDTO) {
         Message newmessage = new Message();
         newmessage.setFromUser(msgDTO.getFromUser());
@@ -126,6 +131,7 @@ public class MainService {
         messageRepository.save(newmessage);
     }
 
+    @Transactional(readOnly = true)
     public List<getmessageDTO> getMessages(conversationDTO conversation){
         User user1 = conversation.getUser1();
         User user2 = conversation.getUser2();
@@ -137,7 +143,7 @@ public class MainService {
         //return messageRepository.findConversation(user1.getId(), user2.getId());
     }
 
-
+    @Transactional(readOnly = true)
     public List<getmessageDTO> getLastChatters(String email) {
         User user = userRepository.findByEmail(email);
         System.out.println("Message: " + email);
@@ -148,6 +154,7 @@ public class MainService {
         //return messageRepository.findConversation(user1.getId(), user2.getId());
 
     }
+    @Transactional
     public void postLanguagesToLearn(languagesToLearnDTO dto) {
         User user = userRepository.findByEmail(dto.getEmail());
         for (String languageName : dto.getLanguagesToLearn()) {
@@ -170,6 +177,7 @@ public class MainService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<Language> getAllLanguages() {
         return languageRepository.findAll();
     }
