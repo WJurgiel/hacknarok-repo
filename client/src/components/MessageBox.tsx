@@ -13,8 +13,8 @@ export const MessageBox: React.FC<MessageBoxProps> = ({ message, fromSelf, onCli
             onClick={onClick}
             style={{
                 alignSelf: fromSelf ? 'flex-end' : 'flex-start',
-                backgroundColor: fromSelf ? '#4dabf7' : '#e9ecef',
-                color: fromSelf ? 'white' : 'black',
+                backgroundColor: fromSelf ? '#252A4A' : '#535151',
+                color: "whitesmoke",
                 padding: '0.5rem 1rem',
                 borderRadius: '16px',
                 maxWidth: '60%',

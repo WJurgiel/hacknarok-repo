@@ -15,7 +15,6 @@ export const MessengerLayout: React.FC = () => {
         setSelectedMessage("");
         setIsOverviewOpen(false);
     }
-
     const mockUsers= [
         {
             avatarUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
@@ -70,16 +69,14 @@ export const MessengerLayout: React.FC = () => {
             lastMessage: 'Siema masz jakąś kłodę kurde ten',
         }]
     return (
-        <Flex style={{ height: '90vh' }}>
+        <Flex style={{ height: '80%'}}>
             <Box style={{ width: '30vw' }}>
                 <ChatList users={mockUsers} />
             </Box>
             <Box
                 style={{
                     flex: isOverviewOpen ? 1 : 2,
-                    margin: '0 1rem',
-                    backgroundColor: '#34444C',
-                    borderRadius: '12px',
+                    margin: '0 1rem 0 0',
                     display: 'flex',
                     flexDirection: 'column',
                 }}
