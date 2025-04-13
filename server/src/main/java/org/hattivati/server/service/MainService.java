@@ -138,7 +138,7 @@ public class MainService {
     }
 
 
-    public List<getmessageDTO> getLastChatters(String email){
+    public List<getmessageDTO> getLastChatters(String email) {
         User user = userRepository.findByEmail(email);
         System.out.println("Message: " + email);
         ArrayList<Message> messages = chattersRepository.findEightLastChatters(user.getId());
@@ -147,6 +147,7 @@ public class MainService {
                 .collect(Collectors.toList());
         //return messageRepository.findConversation(user1.getId(), user2.getId());
 
+    }
     public void postLanguagesToLearn(languagesToLearnDTO dto) {
         User user = userRepository.findByEmail(dto.getEmail());
         for (String languageName : dto.getLanguagesToLearn()) {
