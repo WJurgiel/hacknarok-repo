@@ -5,6 +5,7 @@ import org.hattivati.server.ServerApplication;
 import org.hattivati.server.dto.*;
 import org.hattivati.server.entities.Language;
 import org.hattivati.server.entities.Message;
+import org.hattivati.server.entities.User;
 import org.hattivati.server.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -63,5 +64,10 @@ public class MainController {
     @GetMapping("/languages/all")
     public List<Language> getAllLanguages() {
         return mainService.getAllLanguages();
+    }
+
+    @GetMapping("/matchmake")
+    public userDTO findBestMatch(@RequestBody userDTO dto) {
+        return mainService.findBestMatch(dto);
     }
 }
