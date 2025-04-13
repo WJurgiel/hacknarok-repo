@@ -113,4 +113,8 @@ public class MainService {
             userLearningLanguageRepository.save(userLanguage);
         }
     }
+
+    public List<Language> getAllLanguages() {
+        return languageRepository.findAll();
+    }
 }
