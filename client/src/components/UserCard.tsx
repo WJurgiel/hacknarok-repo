@@ -2,7 +2,7 @@ import {Image, Avatar, Card, Group, Text} from "@mantine/core";
 import {UserCardProps} from "../types/UserCardProps.ts";
 import React from 'react'
 export const UserCard: React.FC<UserCardProps> = ({avatarUrl,name, surname, lastMessage, chatLanguage, isMessageUnread}) => {
-    const flagUrl = `https://flagsapi.com/${chatLanguage}/flat/64.png`;
+    const flagUrl = `https://flagsapi.com/GB/flat/64.png`;
     return (
         <Card
             shadow="xs"
