@@ -11,7 +11,7 @@ public class registrationFormDTO {
     private String password;
     private int age;
     private String gender;
-    private Language mainLanguage;
+    private String mainLanguage;
     private ArrayList<Language> learningLanguages;
 
     public String getName() {
@@ -38,7 +38,7 @@ public class registrationFormDTO {
         return gender;
     }
 
-    public Language getMainLanguage() {
+    public String getMainLanguage() {
         return mainLanguage;
     }
 
@@ -46,7 +46,7 @@ public class registrationFormDTO {
         return learningLanguages;
     }
 
-    public registrationFormDTO(String name, String surname, String email, String password, int age, String gender, Language mainLanguage, ArrayList<Language> learningLanguages) {
+    public registrationFormDTO(String name, String surname, String email, String password, int age, String gender, String mainLanguage, ArrayList<Language> learningLanguages) {
         this.name = name;
         this.surname = surname;
         this.email = email;

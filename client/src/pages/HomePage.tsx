@@ -1,6 +1,8 @@
 import {Button} from "@mantine/core";
 import {useEffect, useRef, useState} from "react";
 import axios from 'axios'
+import {ChatList} from "../components/ChatList.tsx";
+import {MessengerLayout} from "../components/MessengerLayout.tsx";
 export const HomePage = () => {
     const [timeStamp, setTimeStamp] = useState("");
     const [buttonClick, setButtonClick] = useState<boolean>(false);
@@ -22,9 +24,7 @@ export const HomePage = () => {
 
     return (
         <>
-            <Button variant="filled" onClick={click}>Button</Button>
-            <br/>
-            <span>{timeStamp}</span>
+            <MessengerLayout></MessengerLayout>
         </>
     );
 }
