@@ -1,4 +1,5 @@
 import styles from './modules/Login.module.css';
+import { useCookies, CookiesProvider } from "react-cookie";
 import {
     TextInput,
     PasswordInput,
@@ -12,11 +13,13 @@ import { useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [cookies, setCookie] = useCookies(["email"]);
 
     const handleLogin = async () => {
         setError('');
@@ -24,9 +27,13 @@ const Login = () => {
             const response = await axios.post('http://localhost:8080/api/v1/login/form', {
                 email,
                 password,
+        });
+            setCookie("email", email, {
+                path: "/",
+                maxAge: 86400, // 1 dzień
             });
-
             console.log('Login success:', response.data);
+            // handleLoginSuccess(email);
             navigate('/home');
         } catch (err: unknown) {
             console.error('Login failed:', err);

@@ -1,5 +1,6 @@
 package org.hattivati.server.service;
 
+import jakarta.servlet.http.Cookie;
 import org.hattivati.server.dto.*;
 
 import org.hattivati.server.entities.*;
@@ -114,6 +115,7 @@ public class MainService {
         }
         else{
             if(passwordEncoder.matches(userData.getPassword(), user.getPassword())){
+
                 return ResponseEntity.ok().build();
             }else{
                 return ResponseEntity.badRequest().build();
