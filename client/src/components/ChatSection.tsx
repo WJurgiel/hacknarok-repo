@@ -4,7 +4,7 @@ import {useState} from "react";
 import {MessageBox} from "./MessageBox.tsx";
 
 interface ChatSectionProps {
-    onOpenOverview: () => void;
+    onOpenOverview: (messageText:string) => void;
 }
 export const ChatSection: React.FC<ChatSectionProps> = ({onOpenOverview}) => {
     const [messages, setMessages] = useState([
@@ -30,7 +30,7 @@ export const ChatSection: React.FC<ChatSectionProps> = ({onOpenOverview}) => {
             <ScrollArea style={{ flex: 1, marginBottom: '1rem' }}>
                 <Stack spacing="xs">
                     {messages.map((msg, idx) => (
-                        <MessageBox key={idx} message={msg.message} fromSelf={msg.fromSelf} onClick={onOpenOverview} />
+                        <MessageBox key={idx} message={msg.message} fromSelf={msg.fromSelf} onClick={()=>onOpenOverview(msg.message)} />
                     ))}
                 </Stack>
             </ScrollArea>
