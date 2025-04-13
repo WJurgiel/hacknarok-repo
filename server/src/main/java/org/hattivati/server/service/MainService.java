@@ -1,11 +1,8 @@
 package org.hattivati.server.service;
 
 import org.hattivati.server.dto.*;
-import org.hattivati.server.entities.Message;
-import org.hattivati.server.entities.User;
-import org.hattivati.server.repositories.LanguageRepository;
-import org.hattivati.server.repositories.MessageRepository;
-import org.hattivati.server.repositories.UserRepository;
+import org.hattivati.server.entities.*;
+import org.hattivati.server.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +27,12 @@ public class MainService {
 
     @Autowired
     private LanguageRepository languageRepository;
+
+    @Autowired
+    private UserLearningLanguageRepository userLearningLanguageRepository;
+
+    @Autowired
+    private UserLearningLanguageIdRepository userLearningLanguageIdRepository;
 
     public MainService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -87,5 +90,27 @@ public class MainService {
                 .map(getmessageDTO::fromEntity)
                 .collect(Collectors.toList());
         //return messageRepository.findConversation(user1.getId(), user2.getId());
+    }
+
+    public void postLanguagesToLearn(languagesToLearnDTO dto) {
+        User user = userRepository.findByEmail(dto.getEmail());
+        for (String languageName : dto.getLanguagesToLearn()) {
+            Language language = languageRepository.findByName(languageName.toLowerCase());
+            if (language == null) continue;
+
+            UserLearningLanguage userLanguage = new UserLearningLanguage();
+
+            // Set the composite ID
+            UserLearningLanguageId id = new UserLearningLanguageId();
+            id.setUserId(user.getId());
+            id.setLanguageId(language.getId());
+            userLanguage.setId(id);
+
+            // Set the relationships
+            userLanguage.setUser(user);
+            userLanguage.setLanguage(language);
+
+            userLearningLanguageRepository.save(userLanguage);
+        }
     }
 }
