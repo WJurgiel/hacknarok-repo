@@ -2,6 +2,7 @@ import {Navigate, RouteObject, useRoutes} from "react-router-dom";
 import {Layout} from "../app/Layout.tsx";
 import {HomePage} from "./HomePage.tsx";
 import Login from "./Login.tsx";
+import Register from "./Register.tsx";
 
 const routes : RouteObject[] = [
     {
@@ -19,6 +20,10 @@ const routes : RouteObject[] = [
             {
                 path: "/login",
                 element: <Login/>
+            },
+            {
+                path: "/register",
+                element: <Register/>
             }
         ]
     }
