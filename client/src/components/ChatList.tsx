@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import {Box, Flex, ScrollArea, Stack} from "@mantine/core";
 import {UserCard} from "./UserCard.tsx";
 import {SearchBar} from "./SearchBar.tsx";
+import Header from "./Header.tsx";
 export const ChatList : React.FC<ChatListProps> = ({users}) =>{
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredUsers, setFilteredUsers] = useState(users);
@@ -17,13 +18,13 @@ export const ChatList : React.FC<ChatListProps> = ({users}) =>{
     };
     return (
         <div style={{display: 'flex', flexDirection: 'column', width: '25vw'}}>
-            <Flex
-                justify="center"
-            >
-                <Box style={{width: '70%'}}>
-                    <SearchBar searchQuery={searchQuery} onSearch={handleSearch}/>
+            <Box>
+                <Header />
+                <Box mt="md" px="md">
+                    <SearchBar searchQuery={searchQuery} onSearch={handleSearch} />
                 </Box>
-            </Flex>
+            </Box>
+
 
             <Box
                 p="sm"

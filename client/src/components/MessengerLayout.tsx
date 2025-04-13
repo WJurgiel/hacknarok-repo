@@ -15,7 +15,6 @@ export const MessengerLayout: React.FC = () => {
         setSelectedMessage("");
         setIsOverviewOpen(false);
     }
-
     const mockUsers= [
         {
             avatarUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
