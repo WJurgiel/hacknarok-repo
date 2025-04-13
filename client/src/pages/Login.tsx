@@ -6,15 +6,17 @@ import {
     Title,
     Text,
     Stack,
-    Center
+    Group
 } from '@mantine/core';
 import { useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         setError('');
@@ -25,6 +27,7 @@ const Login = () => {
             });
 
             console.log('Login success:', response.data);
+            navigate('/home');
         } catch (err: unknown) {
             console.error('Login failed:', err);
             setError('Invalid email or password');
@@ -32,19 +35,19 @@ const Login = () => {
     };
 
     const handleRegister = () => {
-        console.log('Navigate to register');
+        navigate('/register');
     };
 
     return (
         <div className={styles.loginWrapper}>
             <div className={styles.loginContainer}>
-                <Center className={styles.logoBlock}>
-                    <img src="/logo.png" alt="BabelPal logo" className={styles.logo} />
-                    <Title order={1} className={styles.appTitle}>BabelPal</Title>
-                    <Text c="dimmed" size="lg" >
-                        Where languages meet and friendships grow.
-                    </Text>
-                </Center>
+                <Group className={styles.logoBlock} align="center">
+                    <img src="/logo.png" alt="BabelPal Logo" style={{ height: 100 }} />
+                    <Title order={2} className={styles.appTitle}>BabelPal</Title>
+                </Group>
+                <Text c="dimmed" size="lg" >
+                    Where languages meet and friendships grow.
+                </Text>
 
                 <div className={styles.loginCard}>
                     <div className={styles.loginImage}>
@@ -70,7 +73,7 @@ const Login = () => {
                                 required
                             />
                             {error && <Text c="red" size="sm">{error}</Text>}
-                            <Button color="#829EAB" fullWidth  onClick={handleLogin}>Login</Button>
+                            <Button className={styles.loginButton} color="#829EAB" c="black" fullWidth  onClick={handleLogin}>Login</Button>
                             <Text c="white" size="sm">
                                 Don't have an account?{' '}
                                 <Button variant="subtle" size="xs" onClick={handleRegister}>
