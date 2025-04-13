@@ -55,6 +55,11 @@ public class MainController {
         return mainService.getMessages(conversation);
     }
 
+
+    @PostMapping("/lastChatters")
+    public List<getmessageDTO> getLastChatters (@RequestBody emailDTO email) {
+        return mainService.getLastChatters(email.getEmail());
+
     @PostMapping("/languagestolearn")
     public void postLanguagesToLearn (@RequestBody languagesToLearnDTO dto)
     {
@@ -69,5 +74,6 @@ public class MainController {
     @GetMapping("/matchmake")
     public userDTO findBestMatch(@RequestBody userDTO dto) {
         return mainService.findBestMatch(dto);
+
     }
 }

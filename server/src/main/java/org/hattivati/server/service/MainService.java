@@ -1,8 +1,10 @@
 package org.hattivati.server.service;
 
 import org.hattivati.server.dto.*;
+
 import org.hattivati.server.entities.*;
 import org.hattivati.server.repositories.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class MainService {
 
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private ChattersRepository chattersRepository;;
 
     @Autowired
     private LanguageRepository languageRepository;
@@ -131,6 +136,16 @@ public class MainService {
                 .collect(Collectors.toList());
         //return messageRepository.findConversation(user1.getId(), user2.getId());
     }
+
+
+    public List<getmessageDTO> getLastChatters(String email){
+        User user = userRepository.findByEmail(email);
+        System.out.println("Message: " + email);
+        ArrayList<Message> messages = chattersRepository.findEightLastChatters(user.getId());
+        return messages.stream()
+                .map(getmessageDTO::fromEntity)
+                .collect(Collectors.toList());
+        //return messageRepository.findConversation(user1.getId(), user2.getId());
 
     public void postLanguagesToLearn(languagesToLearnDTO dto) {
         User user = userRepository.findByEmail(dto.getEmail());
