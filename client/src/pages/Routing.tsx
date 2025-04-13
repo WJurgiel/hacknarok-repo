@@ -1,8 +1,11 @@
-import {Navigate, RouteObject, useRoutes} from "react-router-dom";
+import {Navigate, Route, RouteObject, Routes, useRoutes} from "react-router-dom";
 import {Layout} from "../app/Layout.tsx";
 import {HomePage} from "./HomePage.tsx";
 import Login from "./Login.tsx";
 import Register from "./Register.tsx";
+interface RoutingProps {
+    isAuthenticated: boolean;
+}
 
 const routes : RouteObject[] = [
     {
@@ -28,6 +31,14 @@ const routes : RouteObject[] = [
         ]
     }
 ]
-export const Routing = () =>{
-    return useRoutes(routes)
+export const Routing: React.FC<RoutingProps> = ({isAuthenticated}) =>{
+    return  <Routes>
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route
+            path="/home"
+            element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
+        />
+        <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
+    </Routes>
 }

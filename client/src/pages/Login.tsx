@@ -24,7 +24,7 @@ const Login = () => {
             const response = await axios.post('http://localhost:8080/api/v1/login/form', {
                 email,
                 password,
-            });
+            }, {withCredentials: true});
 
             console.log('Login success:', response.data);
             navigate('/home');

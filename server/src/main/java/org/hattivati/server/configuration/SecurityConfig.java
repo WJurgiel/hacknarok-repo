@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 public class SecurityConfig {
     @Bean
@@ -18,12 +20,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // wyłączenie CSRF (dla REST API OK)
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("**").permitAll()  // pozwalamy np. na POST /users
+                        .requestMatchers("/login", "/register").permitAll()  // pozwalamy np. na POST /users
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults()); // lub formLogin()
+                .formLogin(withDefaults()).logout(withDefaults());
 
         return http.build();
     }

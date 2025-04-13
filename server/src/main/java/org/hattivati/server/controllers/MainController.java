@@ -1,5 +1,6 @@
 package org.hattivati.server.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.hattivati.server.ServerApplication;
 import org.hattivati.server.dto.*;
@@ -8,6 +9,7 @@ import org.hattivati.server.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +35,17 @@ public class MainController {
     }
 
     @PostMapping("/login/form")
-    ResponseEntity isDataValid(@Valid @RequestBody loginFormDTO userData){
+    ResponseEntity<?> isDataValid(@Valid @RequestBody loginFormDTO userData, HttpServletRequest response){
         return mainService.isUserValid(userData);
     }
 
+    @GetMapping("/auth/check")
+    public ResponseEntity<?> checkAuth(HttpServletRequest request) {
+        if (request.getSession(false) != null && request.getUserPrincipal() != null) {
+            return ResponseEntity.ok("Logged in");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in");
+    }
     @PostMapping("/register/form")
     public ResponseEntity registerUser(@RequestBody registrationFormDTO userDTO) {
         return mainService.createUser(userDTO);
