@@ -3,6 +3,7 @@ package org.hattivati.server.controllers;
 import jakarta.validation.Valid;
 import org.hattivati.server.ServerApplication;
 import org.hattivati.server.dto.*;
+import org.hattivati.server.entities.Language;
 import org.hattivati.server.entities.Message;
 import org.hattivati.server.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,10 @@ public class MainController {
     public void postLanguagesToLearn (@RequestBody languagesToLearnDTO dto)
     {
         mainService.postLanguagesToLearn(dto);
+    }
+
+    @GetMapping("/languages/all")
+    public List<Language> getAllLanguages() {
+        return mainService.getAllLanguages();
     }
 }
