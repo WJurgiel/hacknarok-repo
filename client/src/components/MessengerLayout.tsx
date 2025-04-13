@@ -6,10 +6,15 @@ import {useState} from "react";
 
 export const MessengerLayout: React.FC = () => {
     const [isOverviewOpen, setIsOverviewOpen] = useState(false);
-
-    const handleOpenOverview = () => {
+    const [selectedMessage, setSelectedMessage] = useState<string>('');
+    const handleOpenOverview = (messageText: string) => {
+        setSelectedMessage(messageText);
         setIsOverviewOpen(true);
     };
+    const handleCloseOverview = () => {
+        setSelectedMessage("");
+        setIsOverviewOpen(false);
+    }
 
     const mockUsers= [
         {
@@ -92,7 +97,7 @@ export const MessengerLayout: React.FC = () => {
                         padding: '1rem',
                     }}
                 >
-                    <OverviewSection />
+                    <OverviewSection message={selectedMessage} onClose={handleCloseOverview} />
                 </Box>
             )}
         </Flex>

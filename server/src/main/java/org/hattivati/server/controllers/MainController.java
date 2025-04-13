@@ -16,6 +16,7 @@ import java.util.List;
 
 @SpringBootApplication
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("api/v1/")
 public class MainController {
 
