@@ -7,7 +7,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({searchQuery, onSearch}) => 
             placeholder="Search for a conversation..."
             value={searchQuery}
             onChange={(e) => onSearch(e.currentTarget.value)}
-            icon="🔍"
             mb="md"
             style={{
                 width: '90%',

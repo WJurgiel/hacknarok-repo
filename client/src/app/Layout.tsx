@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 export const Layout = () => {
     return(
         <div className={styles.app}>
-            <AppHeader></AppHeader>
+            {/*<AppHeader></AppHeader>*/}
             <Outlet></Outlet>
         </div>
     )
