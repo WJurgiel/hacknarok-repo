@@ -12,10 +12,13 @@
   "dependencies": {
     "@mantine/core": "^7.17.4",
     "@mantine/hooks": "^7.17.4",
+    "@tabler/core": "^1.1.1",
+    "@tabler/icons-react": "^3.31.0",
     "axios": "^1.8.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.5.0"
+    "react-router-dom": "^7.5.0",
+    "tabler": "^1.0.0-alpha.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
