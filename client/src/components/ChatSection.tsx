@@ -1,4 +1,4 @@
-import {Box, ScrollArea, Stack, Text} from "@mantine/core";
+import {Box, ScrollArea, Stack} from "@mantine/core";
 import {MessageInput} from "./MessageInput.tsx";
 import {useState} from "react";
 import {MessageBox} from "./MessageBox.tsx";

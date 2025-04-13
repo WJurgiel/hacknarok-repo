@@ -69,7 +69,7 @@ export const MessengerLayout: React.FC = () => {
             lastMessage: 'Siema masz jakąś kłodę kurde ten',
         }]
     return (
-        <Flex style={{ height: '90vh' }}>
+        <Flex style={{ height: '80%' }}>
             <Box style={{ width: '30vw' }}>
                 <ChatList users={mockUsers} />
             </Box>
