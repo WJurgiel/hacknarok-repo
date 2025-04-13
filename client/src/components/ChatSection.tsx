@@ -22,19 +22,17 @@ export const ChatSection: React.FC<ChatSectionProps> = ({onOpenOverview}) => {
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100%',
-                backgroundColor: '#f8f9fa',
-                borderRadius: '12px',
+                backgroundColor: '#34444C',
                 padding: '1rem',
             }}
         >
             <ScrollArea style={{ flex: 1, marginBottom: '1rem' }}>
-                <Stack spacing="xs">
+                <Stack>
                     {messages.map((msg, idx) => (
                         <MessageBox key={idx} message={msg.message} fromSelf={msg.fromSelf} onClick={()=>onOpenOverview(msg.message)} />
                     ))}
                 </Stack>
             </ScrollArea>
-
             <MessageInput onSend={handleSend} />
         </Box>
     );
